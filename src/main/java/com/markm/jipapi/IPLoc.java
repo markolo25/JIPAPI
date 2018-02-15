@@ -13,8 +13,6 @@ public class IPLoc {
             country,
             countryCode,
             isp,
-            latitude,
-            lon,
             org,
             query,
             region,
@@ -23,6 +21,8 @@ public class IPLoc {
             timezone,
             zip;
 
+    private double lon, lat;
+
     /**
      *
      * @param as
@@ -30,7 +30,7 @@ public class IPLoc {
      * @param country
      * @param countryCode
      * @param isp
-     * @param latitude
+     * @param lat
      * @param lon
      * @param org
      * @param query
@@ -40,13 +40,13 @@ public class IPLoc {
      * @param timezone
      * @param zip
      */
-    public IPLoc(String as, String city, String country, String countryCode, String isp, String latitude, String lon, String org, String query, String region, String regionName, String status, String timezone, String zip) {
+    public IPLoc(String as, String city, String country, String countryCode, String isp, double lat, double lon, String org, String query, String region, String regionName, String status, String timezone, String zip) {
         this.as = as;
         this.city = city;
         this.country = country;
         this.countryCode = countryCode;
         this.isp = isp;
-        this.latitude = latitude;
+        this.lat = lat;
         this.lon = lon;
         this.org = org;
         this.query = query;
@@ -141,23 +141,7 @@ public class IPLoc {
      *
      * @return
      */
-    public String getLatitude() {
-        return latitude;
-    }
-
-    /**
-     *
-     * @param latitude
-     */
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getLon() {
+    public double getLon() {
         return lon;
     }
 
@@ -165,8 +149,24 @@ public class IPLoc {
      *
      * @param lon
      */
-    public void setLon(String lon) {
+    public void setLon(double lon) {
         this.lon = lon;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public double getLat() {
+        return lat;
+    }
+
+    /**
+     *
+     * @param lat
+     */
+    public void setLat(double lat) {
+        this.lat = lat;
     }
 
     /**
@@ -275,17 +275,15 @@ public class IPLoc {
 
     /**
      *
-     * @param
+     * @param zip
      */
     public void setZip(String zip) {
         this.zip = zip;
     }
-    
-    
-    
+
     @Override
     public String toString() {
-        return "IPLoc{" + "as=" + as + ", city=" + city + ", country=" + country + ", countryCode=" + countryCode + ", isp=" + isp + ", latitude=" + latitude + ", lon=" + lon + ", org=" + org + ", query=" + query + ", region=" + region + ", regionName=" + regionName + ", status=" + status + ", timezone=" + timezone + ", zip=" + zip + '}';
+        return "IPLoc{" + "as=" + as + ", city=" + city + ", country=" + country + ", countryCode=" + countryCode + ", isp=" + isp + ", latitude=" + lat + ", lon=" + lon + ", org=" + org + ", query=" + query + ", region=" + region + ", regionName=" + regionName + ", status=" + status + ", timezone=" + timezone + ", zip=" + zip + '}';
     }
 
     @Override
@@ -296,7 +294,7 @@ public class IPLoc {
         hash = 67 * hash + Objects.hashCode(this.country);
         hash = 67 * hash + Objects.hashCode(this.countryCode);
         hash = 67 * hash + Objects.hashCode(this.isp);
-        hash = 67 * hash + Objects.hashCode(this.latitude);
+        hash = 67 * hash + Objects.hashCode(this.lat);
         hash = 67 * hash + Objects.hashCode(this.lon);
         hash = 67 * hash + Objects.hashCode(this.org);
         hash = 67 * hash + Objects.hashCode(this.query);
@@ -335,7 +333,7 @@ public class IPLoc {
         if (!Objects.equals(this.isp, other.isp)) {
             return false;
         }
-        if (!Objects.equals(this.latitude, other.latitude)) {
+        if (!Objects.equals(this.lat, other.lat)) {
             return false;
         }
         if (!Objects.equals(this.lon, other.lon)) {
@@ -364,10 +362,5 @@ public class IPLoc {
         }
         return true;
     }
-    
-    
-    
-    
-    
-     
+
 }

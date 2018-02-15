@@ -4,6 +4,7 @@ import java.io.IOException;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.json.*;
 
 /**
  *
@@ -17,13 +18,28 @@ public class Jipapi {
 
     }
 
-    public String Request(String ip) throws IOException {
+    public IPLoc Request(String ip) throws IOException {
         Request request = new Request.Builder()
                 .url("http://ip-api.com/json/" + ip)
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
-            return response.body().string();
+            JSONObject obj = new JSONObject(response.body().string());
+
+            return new IPLoc(obj.getString("as"),
+                    obj.getString("city"),
+                    obj.getString("country"),
+                    obj.getString("countryCode"),
+                    obj.getString("isp"),
+                    obj.getDouble("lat"),
+                    obj.getDouble("lon"),
+                    obj.getString("org"),
+                    obj.getString("query"),
+                    obj.getString("region"),
+                    obj.getString("regionName"),
+                    obj.getString("status"),
+                    obj.getString("timezone"),
+                    obj.getString("zip"));
         }
     }
 }
